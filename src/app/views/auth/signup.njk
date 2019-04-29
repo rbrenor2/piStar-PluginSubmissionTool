@@ -11,7 +11,8 @@
             <!-- NAME INPUT ROW -->
             <div class="row">
               <div class="input-field col s12">
-                <input placeholder="eg.: author_name1, author_name2..." id="full_name" type="text" class="validate" />
+                <input name='full_name' placeholder="eg.: author_name1, author_name2..." id="full_name" type="text"
+                  class="validate" />
                 <label for="full_name">Full name</label>
               </div>
             </div>
@@ -20,13 +21,13 @@
               <label for="type_institution">Institution type</label>
               <p>
                 <label>
-                  <input type="checkbox" class="filled-in" id="is_university" />
+                  <input name='is_university' type="checkbox" class="filled-in" id="is_university" />
                   <span>University</span>
                 </label>
               </p>
               <p>
                 <label>
-                  <input type="checkbox" class="filled-in" id="is_business" />
+                  <input name='is_business' type="checkbox" class="filled-in" id="is_business" />
                   <span>Business</span>
                 </label>
               </p>
@@ -34,22 +35,22 @@
             <!-- INSTITUTION'S NAME -->
             <div class="row">
               <div class="input-field col s6">
-                <input id="institution_name" type="text" class="validate">
+                <input name='institution_name' id="institution_name" type="text" class="validate">
                 <label for="institution_name">Institution's name</label>
               </div>
               <div class="input-field col s6">
-                <input placeholder="Teacher, manager, engineer..." id="role" type="text" class="validate">
+                <input name='role' placeholder="Teacher, manager, engineer..." id="role" type="text" class="validate">
                 <label for="role">Role</label>
               </div>
             </div>
             <!-- EMAIL AND PASSWORD SECTION -->
             <div class="row">
               <div class="input-field col s12">
-                <input id="email" type="email" class="validate">
+                <input name='email' id="email" type="email" class="validate">
                 <label for="email">Email</label>
               </div>
               <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
+                <input name='password' id="password" type="password" class="validate">
                 <label for="password">Password</label>
               </div>
             </div>

@@ -1,5 +1,7 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
 const path = require('path')
 
 class App {
@@ -14,6 +16,21 @@ class App {
 
   middlewares () {
     this.express.use(express.urlencoded({ extended: false }))
+    this.express.use(
+      session({
+        // store: new LokiStore({
+        //   path: path.resolve(__dirname, '..', 'temp', 'sessions.db')
+        // }),
+        store: new RedisStore({
+          host: 'localhost',
+          port: 6379,
+          ttl: 3600
+        }),
+        secret: 'piStarPluginSecret',
+        resave: true,
+        saveUninitialized: true
+      })
+    )
   }
 
   views () {
