@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include "_partials/head.njk" %}
-  <body>
-    <div class"auth-wrapper">
-      {%block body %}{% endblock %}
+
+<body>
+  <nav class="">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">piStar Tool - Plugin Submission</a>
     </div>
-  </body>
+  </nav>
+  <div class="row"></div>
+  <div class="container">
+    {%block body %}{% endblock %}
+  </div>
+</body>
+
 </html>

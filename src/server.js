@@ -18,14 +18,12 @@ class App {
     this.express.use(express.urlencoded({ extended: false }))
     this.express.use(
       session({
-        // store: new LokiStore({
-        //   path: path.resolve(__dirname, '..', 'temp', 'sessions.db')
-        // }),
         store: new RedisStore({
           host: 'localhost',
           port: 6379,
-          ttl: 3600
+          ttl: 1800
         }),
+        name: 'root',
         secret: 'piStarPluginSecret',
         resave: true,
         saveUninitialized: true

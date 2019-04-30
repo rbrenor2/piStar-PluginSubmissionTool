@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "_partials/head.njk" %}
+
+<body>
+  <nav class="">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">piStar Tool - Plugin Submission</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <!-- <li><a href="sass.html">Sass</a></li> -->
+        <!-- <li><a href="badges.html">Components</a></li> -->
+        <li><a href="/app/submit">New Submission<i class="material-icons left">add</i></a></li>
+        <!-- <li><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a></li> -->
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    {%block body %}{% endblock %}
+  </div>
+</body>
+
+</html>
