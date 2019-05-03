@@ -2,6 +2,7 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
+const flash = require('connect-flash')
 const path = require('path')
 
 class App {
@@ -16,6 +17,7 @@ class App {
 
   middlewares () {
     this.express.use(express.urlencoded({ extended: false }))
+    this.express.use(flash())
     this.express.use(
       session({
         store: new RedisStore({

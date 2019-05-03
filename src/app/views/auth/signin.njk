@@ -9,6 +9,7 @@
         <div class="row">
           <form class="col s12" action="/signin" method="POST">
             <!-- EMAIL AND PASSWORD SECTION -->
+            {% include "_partials/flash.njk" %}
             <div class="row">
               <div class="input-field col s12">
                 <input name='email' id="email" type="email" class="validate">

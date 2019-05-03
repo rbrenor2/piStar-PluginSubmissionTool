@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+const Plugin = require('./Plugin')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -40,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.checkPassword = function (password) {
     return bcrypt.compare(password, this.password_hash)
+  }
+
+  // Associations
+  User.associate = models => {
+    User.belongsToMany(models.Plugin, { through: 'UserPlugin' })
   }
 
   return User

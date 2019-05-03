@@ -1,0 +1,29 @@
+<head>
+  <!-- <link rel="stylesheet" href="../../../public/styles.css" /> -->
+  <style type="text/css">
+    .alert {
+      width: 100%;
+      padding: 8px 15px;
+      border-radius: 4px;
+      background: #f38888;
+      border: 1px solid #de6d6d;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 10px;
+    }
+
+    .alert-success {
+      background: #adf7b2;
+      border-color: #96e89c;
+    }
+  </style>
+</head>
+
+
+{% for message in flashSuccess %}
+<div class="alert alert-success">{{ message}}</div>
+{% endfor %}
+
+
+{% for message in flashError %}
+<div class="alert alert-danger">{{ message}}</div>
+{% endfor %}

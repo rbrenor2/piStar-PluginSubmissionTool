@@ -1,4 +1,5 @@
 const express = require('express')
+const flash = require('connect-flash')
 
 const UserController = require('./controllers/UserController')
 const SessionController = require('./controllers/SessionController')
@@ -8,6 +9,15 @@ const authMiddleware = require('./middlewares/auth')
 const guestMiddleware = require('./middlewares/guest')
 
 const routes = express.Router()
+
+// Adding flash messages to all nunjucks views
+routes.use((req, res, next) => {
+  res.locals.flashSuccess = req.flash('success')
+  res.locals.flashError = req.flash('error')
+
+  return next()
+})
+
 // Sign in routes
 routes.get('/', guestMiddleware, SessionController.create)
 routes.post('/signin', SessionController.store)

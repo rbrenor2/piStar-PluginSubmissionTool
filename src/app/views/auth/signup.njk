@@ -9,6 +9,8 @@
         <div class="row">
           <form class="col s12" action="/signup" method="POST">
             <!-- NAME INPUT ROW -->
+            {% include "_partials/flash.njk" %}
+
             <div class="row">
               <div class="input-field col s12">
                 <input name='full_name' id="full_name" type="text" class="validate" />
