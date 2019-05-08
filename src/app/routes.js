@@ -1,5 +1,6 @@
 const express = require('express')
-const flash = require('connect-flash')
+const multer = require('multer')
+const multerConfig = require('../config/multer')
 
 const UserController = require('./controllers/UserController')
 const SessionController = require('./controllers/SessionController')
@@ -21,6 +22,7 @@ routes.use((req, res, next) => {
 // Sign in routes
 routes.get('/', guestMiddleware, SessionController.create)
 routes.post('/signin', SessionController.store)
+
 // Signup routes
 routes.get('/signup', guestMiddleware, UserController.create)
 routes.post('/signup', UserController.store)
@@ -38,6 +40,10 @@ routes.get('/app/logout', SessionController.destroy)
 
 // TODO Plugin submission requests
 routes.get('/app/submit', SubmissionController.create)
-routes.post('/app/submit')
+routes.post(
+  '/app/submit',
+  multer(multerConfig).single('plugin_file'),
+  SubmissionController.store
+)
 
 module.exports = routes

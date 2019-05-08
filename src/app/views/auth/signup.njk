@@ -10,7 +10,7 @@
           <form class="col s12" action="/signup" method="POST">
             <!-- NAME INPUT ROW -->
             {% include "_partials/flash.njk" %}
-
+            <!-- NAME -->
             <div class="row">
               <div class="input-field col s12">
                 <input name='full_name' id="full_name" type="text" class="validate" />
@@ -33,17 +33,23 @@
                 </label>
               </p>
             </div>
+
             <!-- INSTITUTION'S NAME -->
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s4">
                 <input name='institution_name' id="institution_name" type="text" class="validate">
                 <label for="institution_name">Institution's name</label>
               </div>
-              <div class="input-field col s6">
-                <input name='role' placeholder="Teacher, manager, engineer..." id="role" type="text" class="validate">
+              <div class="input-field col s4">
+                <input name='role' id="role" type="text" class="validate">
                 <label for="role">Role</label>
               </div>
+              <div class="input-field col s4">
+                <input name='institution_department' id="institution_department" type="text" class="validate">
+                <label for="institution_department">Department</label>
+              </div>
             </div>
+
             <!-- EMAIL AND PASSWORD SECTION -->
             <div class="row">
               <div class="input-field col s12">

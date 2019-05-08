@@ -7,7 +7,7 @@
       <div class="card-content black-text">
         <span class="card-title">Submit new plugin</span>
         <div class="row">
-          <form class="col s12" action="/app/dashboard" method="POST" enctype="multipart/form-data">
+          <form class="col s12" action="/app/submit" method="POST" enctype="multipart/form-data">
             <!-- NAME INPUT ROW -->
             <div class="row">
               <div class="input-field col s12">
@@ -73,9 +73,8 @@
                 <label for="references">Homepage link</label>
               </div>
             </div>
-            <!-- TYPE OF PLUGIN -->
+            <!-- Plugin type -->
             {% include "submission/plugin_type.njk" %}
-
             <!-- File submission -->
             {% include "submission/file_submission.njk" %}
 
@@ -86,7 +85,6 @@
           </form>
         </div>
       </div>
-
     </div>
   </div>
 </div>

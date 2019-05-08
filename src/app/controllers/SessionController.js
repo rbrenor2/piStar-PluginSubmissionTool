@@ -1,5 +1,5 @@
 const { User } = require('../models')
-const flash = require('connect-flash')
+// const flash = require('connect-flash')
 
 class SessionController {
   async create (req, res) {
