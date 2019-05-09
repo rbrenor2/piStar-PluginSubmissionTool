@@ -7,6 +7,7 @@ class SubmissionController {
     console.log('REQ SUBMISSION')
     console.log(req.body)
     console.log(req.file)
+
     return res.redirect('/')
   }
 }
