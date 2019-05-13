@@ -18,28 +18,19 @@
           <th>Plugin Name</th>
           <th>Authors</th>
           <th>Year</th>
-          <th>Categories</th>
+          <th>Main category</th>
         </tr>
       </thead>
       <tbody>
+      {% for plugin in plugins %}
         <tr>
-          <td>Safety Extension</td>
+          <td>{{plugin.name}}</td>
           <td>Ribeiro, Monyk; Castro Jaelson; Pimentel, João</td>
-          <td>2019</td>
-          <td>Safety</td>
+          <td>{{plugin.category}}</td>
+          <td>{{plugin.created_at}}</td>
         </tr>
-        <tr>
-          <td>Variability for Mobile Information Systems</td>
-          <td>Ali, Raian; Dalpiaz, Fabiano; Giorgini, Paolo; Castro Jaelson; Pimentel, João</td>
-          <td>2008</td>
-          <td>Mobile Systems, Variability</td>
-        </tr>
-        <tr>
-          <td>GODA</td>
-          <td>Mendonça, D. F., Rodrigues, G. N., Ali, R., Alves, V., Baresi, L; Pimentel, João</td>
-          <td>2016</td>
-          <td>Context, Dependability</td>
-        </tr>
+        <a href=''>See details</a>
+      {% endfor %}
       </tbody>
     </table>
   </div>

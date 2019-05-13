@@ -25,6 +25,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      category: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      status: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        default: 'Not posted'
+      },
+      file_link: {
+        type: Sequelize.STRING,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

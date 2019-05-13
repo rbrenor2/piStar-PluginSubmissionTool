@@ -5,13 +5,13 @@
   <div class="col s12">
     <div class="card teal lighten-5">
       <div class="card-content black-text">
-        <span class="card-title">Submit new plugin</span>
+        <span class="card-title">Continue filling the submission form</span>
         <div class="row">
           <form class="col s12" action="/app/submit" method="POST" enctype="multipart/form-data">
             <!-- NAME INPUT ROW -->
             <div class="row">
               <div class="input-field col s12">
-                <input name='plugin_name' id="plugin_name" type="text" class="validate" />
+                <input disabled name='plugin_name' placeholder="{{plugin.name}}" id="plugin_name" type="text" class="validate" />
                 <label for="plugin_name">Plugin name</label>
               </div>
             </div>
@@ -26,7 +26,7 @@
             <!-- Author's user emails -->
             <div class="row">
               <div class="input-field col s12">
-                <input name='authors_users' placeholder="email1, email2, ..." id="authors_users" type="text"
+                <input name='authors_emails' placeholder="email1, email2, ..." id="authors_emails" type="text"
                   class="validate" />
                 <label for="authors_users">Author's user emails</label>
                 <span class="helper-text" data-error="wrong" data-success="right">
@@ -48,7 +48,7 @@
               <!-- <form class="col s12"> -->
               <!-- <div class="row"> -->
               <div class="input-field col s12">
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <textarea name='long_description' id="long_description" class="materialize-textarea"></textarea>
                 <label for="textarea1">Long description</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Here you can explain a little bit more
                   about your plugin. Feel free to write, the text input will expand as you need.</span>
@@ -73,8 +73,6 @@
                 <label for="references">Homepage link</label>
               </div>
             </div>
-            <!-- Plugin type -->
-            {% include "submission/plugin_type.njk" %}
             <!-- File submission -->
             {% include "submission/file_submission.njk" %}
 

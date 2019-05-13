@@ -5,6 +5,7 @@ const multerConfig = require('../config/multer')
 const UserController = require('./controllers/UserController')
 const SessionController = require('./controllers/SessionController')
 const SubmissionController = require('./controllers/SubmissionController')
+const DashboardController = require('./controllers/DashboardController')
 
 const authMiddleware = require('./middlewares/auth')
 const guestMiddleware = require('./middlewares/guest')
@@ -31,19 +32,18 @@ routes.post('/signup', UserController.store)
 routes.use('/app', authMiddleware)
 
 // App routes
-routes.get('/app/dashboard', (req, res) => {
-  console.log(req.session.user)
-  return res.render('dashboard')
-})
+routes.get('/app/dashboard', DashboardController.index)
 
 routes.get('/app/logout', SessionController.destroy)
 
 // TODO Plugin submission requests
-routes.get('/app/submit', SubmissionController.create)
+// routes.get('/app/submit', SubmissionController.create)
+routes.get('/app/create_plugin', SubmissionController.create)
 routes.post(
   '/app/submit',
   multer(multerConfig).single('plugin_file'),
   SubmissionController.store
 )
+routes.post('/app/create_plugin', SubmissionController.createPlugin)
 
 module.exports = routes
