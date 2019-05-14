@@ -8,14 +8,15 @@ class DashboardController {
     }
 
     // if isn't Admin
-    const { id } = req.session.user
-    const pluginIds = await UsersPlugins.findAll({ where: { user_id: id } })
-    const plugins = await Plugin.findAll({ where: { id: pluginIds } })
+    // const { id } = req.session.user
+    // const pluginIds = await UsersPlugins.findAll({ where: { user_id: id } })
+    // const plugins = await Plugin.findAll({ where: { id: pluginIds } })
 
-    console.log(pluginIds)
-    console.log(plugins)
+    // console.log(pluginIds)
+    // console.log(plugins)
 
-    return res.render('dashboard', { plugins })
+    // return res.render('dashboard', { plugins })
+    return res.render('dashboard')
   }
 }
 

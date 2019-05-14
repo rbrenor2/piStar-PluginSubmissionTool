@@ -5,41 +5,40 @@
   <div class="col s12">
     <div class="card teal lighten-5">
       <div class="card-content black-text">
-        <span class="card-title">Continue filling the submission form</span>
+        <span class="card-title">Submit new plugin</span>
         <div class="row">
           <form class="col s12" action="/app/submit" method="POST" enctype="multipart/form-data">
             <!-- NAME INPUT ROW -->
             <div class="row">
               <div class="input-field col s12">
-                <input disabled name='plugin_name' placeholder="{{plugin.name}}" id="plugin_name" type="text" class="validate" />
-                <label for="plugin_name">Plugin name</label>
+                <input name='name' id="name" type="text" class="validate" />
+                <label for="name">Plugin name *</label>
               </div>
             </div>
             <!-- Keywords -->
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder='key2, key2, key3...' name='keywords' id="keywords" type="text" class="validate" />
-                <label for="keywords">Keywords</label>
-                <span class="helper-text" data-error="wrong" data-success="right">Keys separated by commas</span>
+                <label for="keywords">Keywords *</label>
+                <span class="helper-text" data-error="wrong" data-success="right">Keywords separated by commas</span>
               </div>
             </div>
             <!-- Author's user emails -->
             <div class="row">
               <div class="input-field col s12">
-                <input name='authors_emails' placeholder="email1, email2, ..." id="authors_emails" type="text"
+                <input name='authorsEmails' placeholder="email1, email2, ..." id="authorsEmails" type="text"
                   class="validate" />
-                <label for="authors_users">Author's user emails</label>
+                <label for="authorsEmails">Author's user emails *</label>
                 <span class="helper-text" data-error="wrong" data-success="right">
-                  List of emails that the author's used to register in our tool. If an author don't have an account yet,
-                  <a href='/signup'>click here to register</a>.
+                  List of emails that the author's used to register in our tool separated by commas.
                 </span>
               </div>
             </div>
             <!-- Short description -->
             <div class="row">
               <div class="input-field col s12">
-                <input name='short_description' id="short_description" type="text" class="validate" />
-                <label for="short_description">Short description</label>
+                <input name='shortDescription' id="shortDescription" type="text" class="validate" />
+                <label for="shortDescription">Short description *</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Your plugin in one sentence...</span>
               </div>
             </div>
@@ -48,8 +47,8 @@
               <!-- <form class="col s12"> -->
               <!-- <div class="row"> -->
               <div class="input-field col s12">
-                <textarea name='long_description' id="long_description" class="materialize-textarea"></textarea>
-                <label for="textarea1">Long description</label>
+                <textarea name='longDescription' id="longDescription" class="materialize-textarea"></textarea>
+                <label for="longDescription">Long description *</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Here you can explain a little bit more
                   about your plugin. Feel free to write, the text input will expand as you need.</span>
               </div>
@@ -59,20 +58,23 @@
             <!-- References -->
             <div class="row">
               <div class="input-field col s12">
-                <input name='references' placeholder="[reference1][reference2]..." id="references" type="text"
+                <input name='references' placeholder="reference1,reference2..." id="references" type="text"
                   class="validate" />
-                <label for="references">References</label>
+                <label for="references">References *</label>
                 <span class="helper-text" data-error="wrong" data-success="right">References separated by
-                  brackets</span>
+                  commas</span>
               </div>
             </div>
             <!-- Homepage link -->
             <div class="row">
               <div class="input-field col s12">
-                <input name='link_homepage' id="link_homepage" type="text" class="validate" />
-                <label for="references">Homepage link</label>
+                <input name='homepageLink' id="homepageLink" type="text" class="validate" />
+                <label for="references">Homepage link *</label>
               </div>
             </div>
+             <!-- Category -->
+            {% include "submission/plugin_type.njk" %}
+
             <!-- File submission -->
             {% include "submission/file_submission.njk" %}
 

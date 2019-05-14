@@ -37,13 +37,12 @@ routes.get('/app/dashboard', DashboardController.index)
 routes.get('/app/logout', SessionController.destroy)
 
 // TODO Plugin submission requests
-// routes.get('/app/submit', SubmissionController.create)
-routes.get('/app/create_plugin', SubmissionController.create)
+routes.get('/app/submission', SubmissionController.create)
+routes.post('/app/new_plugin2', SubmissionController.createPlugin) // Store a new plugin
 routes.post(
   '/app/submit',
-  multer(multerConfig).single('plugin_file'),
+  multer(multerConfig).single('pluginPackage'),
   SubmissionController.store
 )
-routes.post('/app/create_plugin', SubmissionController.createPlugin)
 
 module.exports = routes

@@ -1,47 +1,97 @@
-const { Plugin } = require('../models')
+const {
+  Plugin,
+  UsersPlugins,
+  Keyword,
+  PluginsKeywords,
+  User
+} = require('../models')
+
+const fs = require('fs')
 
 class SubmissionController {
   create (req, res) {
-    // return res.render('submission')
-    return res.render('new_plugin')
+    return res.render('submission')
   }
 
-  async createPlugin (req, res) {
-    await Plugin.create(req.body).then(plugin => {
-      // return res.redirect('/app/submit', { plugin })
-      return res.render('submission', { plugin: plugin })
-    })
-  }
+  async createPlugin (req, res) {}
 
   async store (req, res) {
-    console.log('REQ SUBMISSION')
-    console.log(req.body)
-    console.log(req.file)
+    const { path } = req.file
+    // TODO read file and return its contents
+    const languageObjects = getObjectsFromFile(path)
 
-    // TODO Deal with keywords
-    //* create array of keywords, store in Keyword table and create entries for each keyword in PluginsKeywords
+    const {
+      name,
+      shortDescription,
+      longDescription,
+      homepageLink,
+      category,
+      references,
+      authorsEmails,
+      keywords,
+      pluginFile
+    } = req.body
 
-    // TODO Deal with authors
-    //* create array of authors and store them in UsersPlugins
+    await Plugin.create({
+      name: name,
+      short_description: shortDescription,
+      long_description: longDescription,
+      homepage_link: homepageLink,
+      category: category,
+      reference: references
+    }).then(async function (plugin) {
+      //* STORE: Create new entry in UsersPlugins for each author
+      const authors = getAuthors(authorsEmails)
+      authors.forEach(async function (email) {
+        await User.findOne({ where: { email: email } }).then(async function (
+          user
+        ) {
+          await UsersPlugins.create({
+            user_id: user.id,
+            plugin_id: plugin.id
+          })
+        })
 
-    // const {
-    //   plugin_name,
-    //   keywords,
-    //   authors_emails,
-    //   short_description,
-    //   long_description,
-    //   homepage_link,
-    //   file_link
-    // } = req.body
-    // await Plugin.create({
-    //   name:
-    // })
-    // return res.redirect('/')
+        //* STORE: Create new entry in Keyword (if it doesn't exists yet) and then create entries in PluginsKeywords
+        const newKeys = getKeywords(keywords)
+        newKeys.forEach(async function (key) {
+          await Keyword.findOne({ where: { title: key } }).then(async function (
+            existingKey
+          ) {
+            if (existingKey) {
+            } else {
+              await Keyword.create({ title: key }).then(async function (
+                storedKey
+              ) {
+                await PluginsKeywords.create({
+                  plugin_id: plugin.id,
+                  keyword_id: storedKey.id
+                })
+              })
+            }
+          })
+        })
+      })
+    })
   }
 }
 
-// function unzip (path) {}
+function getObjectsFromFile (path) {
+  // TODO Unzip
 
-// function getObjects (filesFolder) {}
+  const contents = fs.readFileSync(path, 'utf8')
+  console.log('CONTENTS')
+  console.log(contents)
+}
+
+function getAuthors (authors) {
+  return authors.replace(' ', '').split(',')
+}
+
+function getKeywords (keywords) {
+  return keywords.split(',')
+}
+
+function unzip (path) {}
 
 module.exports = new SubmissionController()

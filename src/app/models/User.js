@@ -43,12 +43,12 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compare(password, this.password_hash)
   }
 
-  User.associate = models => {
-    User.belongsToMany(models.Plugin, {
-      through: models.UsersPlugins,
-      foreign_key: 'user_id'
-    })
-  }
+  // User.associate = models => {
+  //   User.belongsToMany(models.Plugin, {
+  //     through: models.UsersPlugins,
+  //     foreign_key: 'user_id'
+  //   })
+  // }
 
   return User
 }
