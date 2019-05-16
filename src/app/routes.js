@@ -38,7 +38,7 @@ routes.get('/app/logout', SessionController.destroy)
 
 // TODO Plugin submission requests
 routes.get('/app/submission', SubmissionController.create)
-routes.post('/app/new_plugin2', SubmissionController.createPlugin) // Store a new plugin
+// routes.post('/app/new_plugin2', SubmissionController.createPlugin) // Store a new plugin
 routes.post(
   '/app/submit',
   multer(multerConfig).single('pluginPackage'),
