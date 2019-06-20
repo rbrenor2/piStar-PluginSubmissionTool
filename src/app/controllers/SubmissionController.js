@@ -7,6 +7,7 @@ const {
 } = require('../models')
 
 const ShapesRead = require('./auxiliarFunctions/ShapesRead')
+const Utils = require('./auxiliarFunctions/Utils')
 const fs = require('fs')
 const unzip = require('unzip-stream')
 const xml2js = require('xml2js')
@@ -45,7 +46,7 @@ class SubmissionController {
       reference: references
     })
 
-    const authors = getAuthors(authorsEmails)
+    const authors = Utils.getAuthors(authorsEmails)
     authors.forEach(async function (email) {
       const user = await User.findOne({ where: { email: email } })
       UsersPlugins.create({
@@ -54,7 +55,7 @@ class SubmissionController {
       })
     })
 
-    const newKeys = getKeywords(keywords)
+    const newKeys = Utils.getKeywords(keywords)
     newKeys.forEach(async function (key) {
       const existingKey = await Keyword.findOne({ where: { title: key } })
       if (existingKey) {
@@ -67,14 +68,6 @@ class SubmissionController {
       }
     })
   }
-}
-
-function getAuthors (authors) {
-  return authors.replace(' ', '').split(',')
-}
-
-function getKeywords (keywords) {
-  return keywords.split(',')
 }
 
 async function getObjectsFromFile (path, destination, filename) {
