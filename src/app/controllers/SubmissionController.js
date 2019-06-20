@@ -32,53 +32,40 @@ class SubmissionController {
       keywords
     } = req.body
 
-    const objects = await getObjectsFromFile(path, destination, filename)
-    console.log('OBJECTS')
-    console.log(objects)
+    // const objects = await getObjectsFromFile(path, destination, filename)
+    // console.log('OBJECTS')
+    // console.log(objects)
 
-    await Plugin.create({
+    const plugin = await Plugin.create({
       name: name,
       short_description: shortDescription,
       long_description: longDescription,
       homepage_link: homepageLink,
       category: category,
       reference: references
-    }).then(async function (plugin) {
-      //* STORE: Create new entry in UsersPlugins for each author
-      const authors = getAuthors(authorsEmails)
-      authors.forEach(async function (email) {
-        await User.findOne({ where: { email: email } }).then(async function (
-          user
-        ) {
-          await UsersPlugins.create({
-            user_id: user.id,
-            plugin_id: plugin.id
-          })
-        })
+    })
 
-        //* STORE: Create new entry in Keyword (if it doesn't exists yet) and then create entries in PluginsKeywords
-        const newKeys = getKeywords(keywords)
-        newKeys.forEach(async function (key) {
-          await Keyword.findOne({ where: { title: key } }).then(async function (
-            existingKey
-          ) {
-            if (existingKey) {
-            } else {
-              await Keyword.create({ title: key }).then(async function (
-                storedKey
-              ) {
-                await PluginsKeywords.create({
-                  plugin_id: plugin.id,
-                  keyword_id: storedKey.id
-                })
-              })
-            }
-          })
-        })
+    const authors = getAuthors(authorsEmails)
+    authors.forEach(async function (email) {
+      const user = await User.findOne({ where: { email: email } })
+      UsersPlugins.create({
+        user_id: user.id,
+        plugin_id: plugin.id
       })
     })
 
-    // return res.redirect('/')
+    const newKeys = getKeywords(keywords)
+    newKeys.forEach(async function (key) {
+      const existingKey = await Keyword.findOne({ where: { title: key } })
+      if (existingKey) {
+      } else {
+        const storedKey = await Keyword.create({ title: key })
+        PluginsKeywords.create({
+          plugin_id: plugin.id,
+          keyword_id: storedKey.id
+        })
+      }
+    })
   }
 }
 
