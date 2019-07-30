@@ -19,18 +19,35 @@
           <th>Authors</th>
           <th>Year</th>
           <th>Main category</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-      {% for plugin in plugins %}
+        <!-- <td>iStar4Safety</td>
+        <td>Ribeiro, Monyk</td>
+        <td>03/07/2019</td>
+        <td>Safety</td> -->
+        {% for plugin in plugins %}
         <tr>
           <td>{{plugin.name}}</td>
-          <td>Ribeiro, Monyk; Castro Jaelson; Pimentel, João</td>
-          <td>{{plugin.category}}</td>
+          <td>Ribeiro, Monyk</td>
           <td>{{plugin.created_at}}</td>
+          <td>{{plugin.category}}</td>
+          <td>
+            <a href=''>Edit</a>
+            <a href=''> Delete</a>
+
+          </td>
+          <!-- <td>iStar4Safety</td>
+          <td>Ribeiro, Monyk</td>
+          <td>03/07/2019</td>
+          <td>Safety</td>
+          <td>
+            <a href=''>Edit</a>
+            <a href=''> Delete</a>
+          </td> -->
         </tr>
-        <a href=''>See details</a>
-      {% endfor %}
+        {% endfor %}
       </tbody>
     </table>
   </div>

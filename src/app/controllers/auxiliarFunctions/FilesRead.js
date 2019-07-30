@@ -45,12 +45,12 @@ class FilesRead {
           return shapesDict
         case 'ui.metamodel':
           console.log('reading ui.metamodel file...')
-          return 'uimetamodel'
+          return file
         default:
           return 'default'
       }
     } else {
-      console.log('File error')
+      console.log('File error: ' + name)
     }
   }
 }

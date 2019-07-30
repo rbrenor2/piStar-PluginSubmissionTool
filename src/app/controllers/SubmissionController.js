@@ -17,6 +17,10 @@ class SubmissionController {
     return res.render('submission')
   }
 
+  success (req, res) {
+    return res.render('submission/success')
+  }
+
   async store (req, res) {
     const { path, destination } = req.file
 
@@ -35,7 +39,7 @@ class SubmissionController {
     await fs
       .createReadStream(path)
       .pipe(unzip.Extract({ path: destination }))
-      .on('finish', async function () {
+      .on('close', async () => {
         // TODO read each file
         console.log(destination)
         const images = FilesRead.readSVG(destination)
@@ -44,17 +48,23 @@ class SubmissionController {
         const shapes = FilesRead.readFiles('shapes', destination)
         const uimetamodel = FilesRead.readFiles('ui.metamodel', destination)
 
-        const plugin = Plugin.create({
+        // Delete files from server
+        fs.unlink(path, () => console.log('.ZIP File deleted'))
+        fs.unlink(destination + '/language', () =>
+          console.log('language folder deleted')
+        )
+
+        const plugin = await Plugin.create({
           name: name,
           short_description: shortDescription,
           long_description: longDescription,
           homepage_link: homepageLink,
           category: category,
           reference: references,
-          svgs: images,
+          svgs: JSON.stringify(images),
           constraints: constraints,
           metamodel: metamodel,
-          shapes: shapes,
+          shapes: JSON.stringify(shapes),
           uimetamodel: uimetamodel
         })
 
@@ -79,6 +89,7 @@ class SubmissionController {
             })
           }
         })
+        return res.redirect('/app/submission/success')
       })
   }
 }

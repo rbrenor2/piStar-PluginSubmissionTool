@@ -6,6 +6,7 @@ const UserController = require('./controllers/UserController')
 const SessionController = require('./controllers/SessionController')
 const SubmissionController = require('./controllers/SubmissionController')
 const DashboardController = require('./controllers/DashboardController')
+const APIController = require('./controllers/APIController')
 
 const authMiddleware = require('./middlewares/auth')
 const guestMiddleware = require('./middlewares/guest')
@@ -28,7 +29,7 @@ routes.post('/signin', SessionController.store)
 routes.get('/signup', guestMiddleware, UserController.create)
 routes.post('/signup', UserController.store)
 
-// Routes that contain /app: use the authMiddleware to do user/session verfication
+// Routes that contain /app: use the authMiddleware to do user/session verification
 routes.use('/app', authMiddleware)
 
 // App routes
@@ -36,13 +37,19 @@ routes.get('/app/dashboard', DashboardController.index)
 
 routes.get('/app/logout', SessionController.destroy)
 
-// TODO Plugin submission requests
+// Submission routes
 routes.get('/app/submission', SubmissionController.create)
-// routes.post('/app/new_plugin2', SubmissionController.createPlugin) // Store a new plugin
+
 routes.post(
   '/app/submit',
   multer(multerConfig).single('pluginPackage'),
   SubmissionController.store
 )
+
+routes.get('/app/submission/success', SubmissionController.success)
+
+// API Routes
+routes.get('/api/plugins', APIController.listAllPlugins)
+routes.get('/api/plugins/:id', APIController.getPluginById)
 
 module.exports = routes

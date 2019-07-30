@@ -6,7 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     homepage_link: DataTypes.STRING,
     category: DataTypes.STRING,
     reference: DataTypes.STRING,
-    file_link: DataTypes.STRING
+    svgs: DataTypes.STRING,
+    published: DataTypes.BOOLEAN,
+    constraints: DataTypes.STRING,
+    metamodel: DataTypes.STRING,
+    shapes: DataTypes.STRING,
+    uimetamodel: DataTypes.STRING,
+    use_count: DataTypes.STRING
   })
 
   Plugin.associate = models => {
